@@ -17,3 +17,88 @@ In order to post comment on a status:
 In order to like a status:
 1. GO to the status page (by clicking "View More")
 2. click on like/dislike button.
+
+
+
+Database Objects:
+1. User: django's inbuild user table. Cannot be edited to add more fields.
+2. CustomUser - Custom table with a 1-1 relationship with the User table. I have linked all other tables to this object. Has no other fields.
+3. Status - stores the details of a status.
+    Fields:
+        data - stores the status text
+        date_created
+        date_modified
+        owner - foreign key to CustomUser
+4. Comment - stores comment data
+    Fields:
+        data - stores the comment text
+        date_created
+        date_modified
+        status - foreign key to Status; represents the status on which this comment has been posted.
+        owner - foreign key to CustomUser; poster of the comment
+5. CommentLike - stores likes on comments
+    Fields:
+        owner - foreign key to CustomUser; the one who liked
+        up - boolean value, True-like,False-dislike
+        parent - foreign key to Comment, the comment on which this like is present
+        (only model present, view not implemented yet)
+6. StatusLike - stores likes on status
+    Fields:
+        owner - foreign key to CustomUser; the one who liked
+        up - boolean value, True-like,False-dislike
+        parent - foreign key to Status, the comment on which this like is present
+
+Views (URL endpoints):
+
+1. /newsfeed: returns the newsfeed. GET only.
+    parameters:
+        'owner' - integer - if present, returns newsfeed of the CustomUser with primary key = owner. otherwise of the logged in user.
+2. /status:
+    GET: 
+    parameters:
+        'status_id' - primary key of the status to display. if present, gives details of this status. if not, returns an HTML form to post a status.
+    POST: posts a new status
+    parameters:
+        'data' - status text
+3. profile: returns the profile of a user with links to go to his newsfeed.
+    GET only.
+    parameters: 'id' - primary key of the user who's profile is to be viewed. If not present, gives profile of logged in user.
+4. logout_do: logs out the user.
+    GET only.
+5. login_do: logs in a user.
+    GET:
+    	returns a login form.
+    POST:
+        logs in the user.
+    parameters:
+        username
+        password - password field.
+        (if username and password are valid, signs in the user)
+6. signup: signs up the user.
+    GET: returns a signup form
+    POST: creates a new user.
+    parameters:
+        password1 - password field.
+        password2 - field to confirm user password.
+        (if password1 and password2 do not match, it gives an error).
+7. comment: to post a comment on a status
+    GET: returns a post comment form
+    parameters:
+        'id' - primary key of the status on which to comment. If not present, returns an error.
+    POST: creates a comment object.
+    parameters:
+        'id' - primary key of the status on which to comment. If not present, returns an error.
+        'data' - comment text
+8. like_status: to like a status
+    GET only.
+    parameters:
+        'id' - primary key of the status on which to comment. If not present, returns an error.
+        'positive' - if equal to 1, creates a like
+        'negavtive' - if equal to 1, creates a dislike.
+        Checks for 'negative' first, so if 'negative=1' is present then it'll create a dislike. Only if 'negative' is not present will it check for 'positive'.
+        
+    redirects the user to the status on which the like has been performed.
+9. search: to search for a user and go to his newsfeed
+    GET only.
+    parameters:
+        'username': username of the user. If found, it'll redirect to his newsfeed. Otherwise return a 404.
