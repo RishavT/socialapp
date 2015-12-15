@@ -1,0 +1,30 @@
+<html>
+<body>
+
+<br>
+<h3>Status</h3>
+<p>{{ status.data }}</p>
+<p>Posted By: <a href=/profile?id={{status.owner.id}}>{{status.owner}}</a></p>
+<p>Likes: {{likes}}</p>
+<p>Dislikes: {{dislikes}}</p>
+<p>Posted: {{status.date_created}}</p>
+<p>Last Modified: {{status.date_modified}}</p>
+<p>
+<a href='/likestatus?id={{status.id}}&positive=1'>Like this</a></p>
+<p><a href='/likestatus?id={{status.id}}&negative=1'>Dislike this</a></p>
+<br>
+<br>
+<h3>Comments:</h3>
+{% for x in comments %}
+<p><a href=/profile?id={{x.owner.pk}}>{{x.owner}}</a> says: {{x.data}}</p>
+<p>Posted: {{x.date_created}}</p>
+<p>Last Modified: {{x.date_modified}}</p>
+{% endfor %}
+
+
+</body>
+<p><a href='/comment?id={{status.pk}}'>Post a comment</a>
+<p>Posted: {{x.date_created}}</p>
+<p>Last Modified: {{x.date_modified}}</p>
+{% include 'topbar.html' %}
+</html>

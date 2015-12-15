@@ -1,0 +1,15 @@
+<html>
+<body>
+<h2><a href='/profile?id={{owner.pk}}'>{{owner}}</a>'s Newsfeed</h2>
+{% for x in statuses %}
+<br>
+<h3>{{ x.data }}</h3>
+<p>Posted: {{x.date_created}}</p>
+<p>Last Modified: {{x.date_modified}}</p>
+
+<p><a href='/status?status_id={{ x.pk }}'>View More</a></p>
+{% endfor %}
+
+</body>
+{% include 'topbar.html' %}
+</html>

@@ -1,0 +1,12 @@
+<html>
+<body>
+
+<h2><a href='/profile?id={{user.customuser.id}}'>{{user}}</a>'s profile</h2>
+<p> Username: {{user}}</p>
+<p>NewsFeed: <a href='/newsfeed?owner={{user.customuser.id}}'>Click Here</a></p>
+{% if me %}
+<p>Change Password</p>
+{% endif %}
+</body>
+{% include 'topbar.html' %}
+</html>
