@@ -1,0 +1,19 @@
+Basic Social Media application.
+
+Functionality:
+> login/logout/signup
+> veiw newsfeed or self or others
+> post comment on status
+> Like/dislike a status
+
+In order to view comments on a status:
+>From the news feed, locate the status and click on "View More"
+
+In order to post comment on a status:
+1. Go to someone's newsfeed and locate the satus
+2. Click on "view more"
+3. Scroll down and click on "Post Comment"
+
+In order to like a status:
+1. GO to the status page (by clicking "View More")
+2. click on like/dislike button.

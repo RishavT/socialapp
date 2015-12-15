@@ -1,0 +1,20 @@
+Instructions:
+
+1. clone/unzip the project. A folder called 'socialapp' should be created.
+2. CD into the directory where 'socialapp' exists (if not there already), and set up a python virtualenv using the following command:
+    virtualenv socialapp.
+    
+    For example, if your directory structure is /home/user/Downloads/socialapp:
+    1. cd /home/user/Downloads
+    2. virtualenv socialapp
+3. cd into socialapp
+4. activate the virtualenv:
+    source ./bin/activate
+4. install the required packages using pip:
+    pip install -r < requirements.txt
+5. start the django server:
+    python ./project/manage.py runserver
+   
+   
+Now you can access the webapp from http://localhost:8000/
+    
